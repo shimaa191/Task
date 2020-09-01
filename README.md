@@ -1,13 +1,13 @@
-# Landing Page Project
+ 
+ 
+ Landing Page Project
 
-## Table of Contents
+in this project we dynamically create a navigation menu , and links of navigation menu scroll to section ,and the section be active when be in viewport.
+i used html to create the sections, used css to add styles,and javascript to create navigation menu and add events 
 
-* [Instructions](#instructions)
+to see the code you need a text editor like (notepad++,notepad) or you can use visual studio code program. 
+to run it and see what this code do you need any internet browsers like (chrome,Firefox).
+to run and test the code open the file 'index.html' by internet browser.
 
-## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.

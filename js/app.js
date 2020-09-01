@@ -94,7 +94,6 @@ ul_element.appendChild(fragment);
  *
 */
 
-// Scroll to anchor ID using scrollTO event
 
 // Scroll to section on link click
 for (i = 1; i <= 5; i++) {
