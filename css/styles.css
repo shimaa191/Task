@@ -24,7 +24,11 @@ h1 {
     font-size: 3em;
     margin: 2em 1rem;
 }
-
+.active_link
+{
+    background: rgb(182, 6, 6);
+    color: darkgreen;
+}
 @media only screen and (min-width: 35em){
     h1 {
         font-size: 7em;
@@ -63,10 +67,7 @@ section {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
-.active
-{
-    background: #333;
-}
+
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;

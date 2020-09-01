@@ -18,26 +18,54 @@
  * 
 */
 const ul_element = document.getElementById('navbar__list');
-const li_element1 = document.createElement("li"),
-    li_element2 = document.createElement("li"),
-    li_element3 = document.createElement("li"),
-    li_element4 = document.createElement("li"),
-    li_element5 = document.createElement("li"),
-    anchor1 = document.createElement("a"),
-    anchor2 = document.createElement("a"),
-    anchor3 = document.createElement("a"),
-    anchor4 = document.createElement("a"),
-    anchor5 = document.createElement("a");
-let li_contant, height = window.scrollY;
-console.log(height);
+const fragment = document.createDocumentFragment();
+let i = 1, section = 'section', ch = '#', li_id = 'li', li_element, anchor, li_contant, scroll_yy; //build menu 
+
+//= window.scrollY;
+//console.log(height);
+
+
 
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
-
-
+function scroll_to_section(element, prevent) {
+    prevent.preventDefault();
+    li_contant = element.textContent;
+    let sec = document.getElementById(li_contant);
+    window.scrollTo({
+        top: sec.offsetTop,
+        behavior: 'smooth'
+    });
+}
+function check(section1, section2,linkk) {
+    window.addEventListener('scroll', function () {
+        let scroll_y = window.scrollY;
+        if (scroll_y >= (section1.offsetTop-100) && scroll_y < (section2.offsetTop-100)) {
+            section1.classList.add('your-active-class');
+            linkk.classList.add('active_link');
+        }
+        else {
+            section1.classList.remove('your-active-class');
+            linkk.classList.remove('active_link');
+        }
+    });
+}
+function check5(section1,linkk) {
+    window.addEventListener('scroll', function () {
+        let scroll_y = window.scrollY;
+        if (scroll_y >= (section1.offsetTop-100)) {
+            section1.classList.add('your-active-class');
+            linkk.classList.add('active_link');
+        }
+        else {
+            section1.classList.remove('your-active-class');
+            linkk.classList.remove('active_link');
+        }
+    });
+}
 
 /**
  * End Helper Functions
@@ -47,188 +75,49 @@ console.log(height);
 
 // build the nav
 
-
-
-
-
-
-// Scroll to anchor ID using scrollTO event
-li_element1.addEventListener('click', function (e) {
-    e.preventDefault();
-    window.scrollTo({
-        top: 400,
-        behavior: 'smooth'
-    });
-})
-li_element2.addEventListener('click', function (e) {
-    e.preventDefault();
-    window.scrollTo({
-        top: 1000,
-        behavior: 'smooth'
-    });
-})
-li_element3.addEventListener('click', function (e) {
-    e.preventDefault();
-    window.scrollTo({
-        top: 1600,
-        behavior: 'smooth'
-    });
-})
-li_element4.addEventListener('click', function (e) {
-    e.preventDefault();
-    window.scrollTo({
-        top: 2150,
-        behavior: 'smooth'
-    });
-})
-li_element5.addEventListener('click', function (e) {
-    e.preventDefault();
-    window.scrollTo({
-        top: 2750,
-        behavior: 'smooth'
-    });
-});
-
-
+// Build menu 
+for (i; i <= 5; i++) {
+    li_element = document.createElement("li");
+    li_element.setAttribute("id", li_id + i);
+    anchor = document.createElement("a");
+    anchor.setAttribute("href", ch + section + i);
+    anchor.setAttribute("class", "menu__link");
+    li_contant = document.createTextNode(section + i);
+    anchor.appendChild(li_contant);
+    li_element.appendChild(anchor);
+    fragment.appendChild(li_element);
+}
+ul_element.appendChild(fragment);
 /**
  * End Main Functions
  * Begin Events
- * 
+ *
 */
 
-// Build menu 
-anchor1.setAttribute("href", "#section1");
-anchor1.setAttribute("class", "menu__link");
-li_contant = document.createTextNode('Section One');
-anchor1.appendChild(li_contant);
-li_element1.appendChild(anchor1);
-ul_element.appendChild(li_element1);
-
-anchor2.setAttribute("href", "#section2");
-anchor2.setAttribute("class", "menu__link");
-li_contant = document.createTextNode('Section Two');
-anchor2.appendChild(li_contant);
-li_element2.appendChild(anchor2);
-ul_element.appendChild(li_element2);
-
-anchor3.setAttribute("href", "#section3");
-anchor3.setAttribute("class", "menu__link");
-li_contant = document.createTextNode('Section Three');
-anchor3.appendChild(li_contant);
-li_element3.appendChild(anchor3);
-ul_element.appendChild(li_element3);
-
-anchor4.setAttribute("href", "#section4");
-anchor4.setAttribute("class", "menu__link");
-li_contant = document.createTextNode('Section Four');
-anchor4.appendChild(li_contant);
-li_element4.appendChild(anchor4);
-ul_element.appendChild(li_element4);
-
-anchor5.setAttribute("href", "#section5");
-anchor5.setAttribute("class", "menu__link");
-li_contant = document.createTextNode('Section Five');
-anchor5.appendChild(li_contant);
-li_element5.appendChild(anchor5);
-ul_element.appendChild(li_element5);
-
+// Scroll to anchor ID using scrollTO event
 
 // Scroll to section on link click
+for (i = 1; i <= 5; i++) {
+    let li_element = document.getElementById(li_id + i);
+    li_element.addEventListener('click', function (e) {
+        scroll_to_section(this, e);
+    });
+}
+
 
 // Set sections as active
-window.addEventListener('scroll', function () {
-    height = window.scrollY;
-    if (height < 210) {
-        anchor1.classList.remove('active');
-        anchor2.classList.remove('active');
-        anchor3.classList.remove('active');
-        anchor4.classList.remove('active');
-        anchor5.classList.remove('active');
+for (i = 1; i <= 5; i++) {
+    let v = i + 1;
+    let sec = document.getElementById(section + i);
+    let sec2 = document.getElementById(section + v);
+    let li_element=document.getElementById(li_id + i);
+    let anchor=li_element.querySelector('a');
+    if (i === 5) {
+        check5(sec,anchor);
     }
-    else if (height >= 210 && height < 895) {
-        anchor1.classList.add('active');
-        anchor2.classList.remove('active');
-        anchor3.classList.remove('active');
-        anchor4.classList.remove('active');
-        anchor5.classList.remove('active');
-    
+    else {
+        check(sec, sec2,anchor);
     }
-    else if (height >= 895 && height < 1445) {
-        anchor1.classList.remove('active');
-        anchor2.classList.add('active');
-        anchor3.classList.remove('active');
-        anchor4.classList.remove('active');
-        anchor5.classList.remove('active');
-    }
-    else if (height >= 1445 && height < 2035) {
-        anchor1.classList.remove('active');
-        anchor2.classList.remove('active');
-        anchor3.classList.add('active');
-        anchor4.classList.remove('active');
-        anchor5.classList.remove('active');
-    }
-    else if (height >= 2035 && height < 2622) {
-        anchor1.classList.remove('active');
-        anchor2.classList.remove('active');
-        anchor3.classList.remove('active');
-        anchor4.classList.add('active');
-        anchor5.classList.remove('active');
-    }
-    else if (height >= 2622) {
-        anchor1.classList.remove('active');
-        anchor2.classList.remove('active');
-        anchor3.classList.remove('active');
-        anchor4.classList.remove('active');
-        anchor5.classList.add('active');
-    }
-    
-    
+}
 
-});
-
-// Add class 'active' to section when near top of viewport
-
-if (height < 210) {
-    anchor1.classList.remove('active');
-    anchor2.classList.remove('active');
-    anchor3.classList.remove('active');
-    anchor4.classList.remove('active');
-    anchor5.classList.remove('active');
-}
-else if (height >= 210 && height < 895) {
-    anchor1.classList.add('active');
-    anchor2.classList.remove('active');
-    anchor3.classList.remove('active');
-    anchor4.classList.remove('active');
-    anchor5.classList.remove('active');
-
-}
-else if (height >= 895 && height < 1445) {
-    anchor1.classList.remove('active');
-    anchor2.classList.add('active');
-    anchor3.classList.remove('active');
-    anchor4.classList.remove('active');
-    anchor5.classList.remove('active');
-}
-else if (height >= 1445 && height < 2035) {
-    anchor1.classList.remove('active');
-    anchor2.classList.remove('active');
-    anchor3.classList.add('active');
-    anchor4.classList.remove('active');
-    anchor5.classList.remove('active');
-}
-else if (height >= 2035 && height < 2622) {
-    anchor1.classList.remove('active');
-    anchor2.classList.remove('active');
-    anchor3.classList.remove('active');
-    anchor4.classList.add('active');
-    anchor5.classList.remove('active');
-}
-else if (height >= 2622) {
-    anchor1.classList.remove('active');
-    anchor2.classList.remove('active');
-    anchor3.classList.remove('active');
-    anchor4.classList.remove('active');
-    anchor5.classList.add('active');
-}
 
